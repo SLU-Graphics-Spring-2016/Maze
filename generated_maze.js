@@ -53,17 +53,22 @@ document.body.appendChild(renderer.domElement);
 // var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 // First Person Controls
-var controls = new THREE.FirstPersonControls( camera, renderer.domElement );
-controls.movementSpeed = 2.0;
-controls.lookSpeed = 0.3;
+// var controls = new THREE.FirstPersonControls( camera, renderer.domElement );
+// controls.movementSpeed = 2.0;
+// controls.lookSpeed = 0.3;
 
-var clock = new THREE.Clock();
-
+// var clock = new THREE.Clock();
+// position and point the camera to the center of the scene
+        camera.position.x = 80;
+        camera.position.y = 120;
+        camera.position.z = 100;
+        camera.lookAt(scene.position);
 function render() {
-	var delta = clock.getDelta();
-  controls.update(delta);
+	// var delta = clock.getDelta();
+ //  controls.update(delta);
   requestAnimationFrame(render);
   renderer.render(scene, camera);
+  // console.log(camera.lookAt);
 }
 
 render();

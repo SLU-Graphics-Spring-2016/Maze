@@ -140,7 +140,14 @@ var Maze = function (scene, cells, width, height) {
             var wallMesh = new THREE.Mesh(wallGeom, wallMaterial);
 
             // finally position it correctly
-            wallMesh.position = new THREE.Vector3(x1 - ((x1 - x2) / 2) -(self.height/2), wallGeom.height/2, y1 - ((y1 - y2)) / 2 - (self.width /2));
+            var a=x1 - ((x1 - x2) / 2) -(self.height/2);
+            // var b= wallGeom.height/2;
+            var c= y1 - ((y1 - y2)) / 2 - (self.width /2)
+            // wallMesh.position = new THREE.Vector3(x1 - ((x1 - x2) / 2) -(self.height/2), wallGeom.height/2, y1 - ((y1 - y2)) / 2 - (self.width /2));
+            wallMesh.position=new THREE.Vector3();
+            wallMesh.position.x=a;
+            wallMesh.position.y=0;
+            wallMesh.position.z=c;
 
             self.elements.push(wallMesh);
             scene.add(wallMesh);
