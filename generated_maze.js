@@ -77,12 +77,13 @@ if ( havePointerLock ) {
 
   var prevTime = performance.now();
   var velocity = new THREE.Vector3();
-
+  var maze;
   function init () {
     // create a scene, that will hold all our elements such as objects, cameras and lights.
     scene = new THREE.Scene();
     scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
-    var maze = new Maze(scene,17, 200, 200);
+    maze = new Maze(scene,17, 200, 200);
+    console.log(maze.getElements());
     maze.generate();
     maze.draw();
 
@@ -180,7 +181,8 @@ if ( havePointerLock ) {
     document.addEventListener( 'keydown', onKeyDown, false );
     document.addEventListener( 'keyup', onKeyUp, false );
 
-    raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
+    raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3(), 0, 10);
+    console.log(maze.width);
     //Rendering
 
     renderer = new THREE.WebGLRenderer();
@@ -188,19 +190,6 @@ if ( havePointerLock ) {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
     document.body.appendChild(renderer.domElement);
-    // var controls = new THREE.OrbitControls(camera, renderer.domElement);
-    
-    // First Person Controls
-    // var controls = new THREE.FirstPersonControls( camera, renderer.domElement );
-    // controls.movementSpeed = 2.0;
-    // controls.lookSpeed = 0.3;
-    
-    // var clock = new THREE.Clock();
-    // position and point the camera to the center of the scene
-    // camera.position.x = 80;
-    // camera.position.y = 120;
-    // camera.position.z = 100;
-    // camera.lookAt(scene.position);
   }
 
   function animate() {
@@ -208,9 +197,9 @@ if ( havePointerLock ) {
       
     if ( controlsEnabled ) {
       raycaster.ray.origin.copy( controls.getObject().position );
-      raycaster.ray.origin.y -= 10;
+      raycaster.ray.direction.copy(controls.getObject().getWorldDirection());
 
-      var intersections = raycaster.intersectObjects( objects );
+      var intersections = raycaster.intersectObjects( maze.getElements() );
       var isOnObject = intersections.length > 0;
 
       var time = performance.now();
@@ -229,6 +218,7 @@ if ( havePointerLock ) {
       if ( isOnObject === true ) {
         velocity.y = Math.max( 0, velocity.y );
         canJump = true;
+        console.log("hit");
       }
 
       controls.getObject().translateX( velocity.x * delta );

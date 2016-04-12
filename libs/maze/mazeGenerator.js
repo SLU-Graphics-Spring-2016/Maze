@@ -3,12 +3,16 @@ var MazeGenerator = function(rows, cols) {
 	this.cellStack = [];
 
 	var self = this;
-
+  var seed = 1;
+  function random() {
+    var x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+  }
 	var recurse = function(cell) {
 		cell.visit();
     var neighbors = self.graph.cellUnvisitedNeighbors(cell);
     if(neighbors.length > 0) {
-    	var randomNeighbor = neighbors[Math.floor(Math.random() * neighbors.length)];
+    	var randomNeighbor = neighbors[Math.floor(random() * neighbors.length)];
     	self.cellStack.push(cell);
     	self.graph.removeEdgeBetween(cell, randomNeighbor);
     	recurse(randomNeighbor);
