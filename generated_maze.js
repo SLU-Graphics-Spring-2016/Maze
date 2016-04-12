@@ -89,7 +89,8 @@ if ( havePointerLock ) {
 
     // create a camera, which defines where we're looking at.
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-    // camera.position.y=1;
+    // camera.position.y=54;
+    // camera.position.z=100;
     // camera.lookAt(new THREE.Vector3(0,0,0));
 
 
@@ -115,6 +116,7 @@ if ( havePointerLock ) {
     spotLight.castShadow = true;
 
     var ambientLight = new THREE.AmbientLight(0x080808);
+    ambientLight.position.set(30,30,0);
     scene.add(ambientLight);
 
     scene.add(spotLight);
@@ -145,7 +147,7 @@ if ( havePointerLock ) {
           break;
 
         case 32: // space
-          if ( canJump === true ) velocity.y += 350;
+          if ( canJump === true ) velocity.y += 150;
             canJump = false;
             break;
       }
