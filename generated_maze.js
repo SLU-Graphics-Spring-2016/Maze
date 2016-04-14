@@ -87,13 +87,16 @@ if ( havePointerLock ) {
     maze.generate();
     maze.draw();
 
+    flashlight = new THREE.SpotLight(0xffffff,1,80);
 
     // create a camera, which defines where we're looking at.
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
     // camera.position.y=54;
     // camera.position.z=100;
     // camera.lookAt(new THREE.Vector3(0,0,0));
-
+    camera.add(flashlight);
+    flashlight.position.set(0,0,1);
+    flashlight.target = camera;
 
     // create the ground plane
     var planeGeometry = new THREE.PlaneGeometry(200, 200);
@@ -111,17 +114,19 @@ if ( havePointerLock ) {
     
     // add spotlight for the shadows
     var spotLight = new THREE.SpotLight(0xffffff);
-    spotLight.position.set(40, 100, 280);
+    spotLight.position.set(0, 100, 0);
     spotLight.shadow.camera.near = 20;
     spotLight.shadow.camera.far = 50;
     spotLight.castShadow = true;
 
     var ambientLight = new THREE.AmbientLight(0x080808);
-    ambientLight.position.set(30,30,0);
+    ambientLight.position.set(0,30,0);
     scene.add(ambientLight);
 
+    // var ambientLight1 = new THREE.AmbientLight(0x080808);
+    // ambientLight.position.set(-30,30,0);
+    // scene.add(ambientLight1);
     scene.add(spotLight);
-
     controls = new THREE.PointerLockControls( camera );
     scene.add( controls.getObject() );
 
@@ -181,7 +186,7 @@ if ( havePointerLock ) {
     document.addEventListener( 'keydown', onKeyDown, false );
     document.addEventListener( 'keyup', onKeyUp, false );
 
-    raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3(), 0, 10);
+    raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3(), 0,10);
     console.log(maze.width);
     //Rendering
 
@@ -197,10 +202,12 @@ if ( havePointerLock ) {
       
     if ( controlsEnabled ) {
       raycaster.ray.origin.copy( controls.getObject().position );
-      raycaster.ray.direction.copy(controls.getObject().getWorldDirection());
+      // raycaster.ray.direction.copy(controls.getObject().getWorldDirection());
+      raycaster.ray.direction.copy(velocity);
 
       var intersections = raycaster.intersectObjects( maze.getElements() );
       var isOnObject = intersections.length > 0;
+      console.log(isOnObject);
 
       var time = performance.now();
       var delta = ( time - prevTime ) / 1000;
@@ -219,8 +226,10 @@ if ( havePointerLock ) {
         velocity.y = Math.max( 0, velocity.y );
         canJump = true;
         console.log("hit");
+        velocity.z=Math.max(0,velocity.z);
       }
-
+      
+      velocity.z-= velocity.z * 10.0 * delta;
       controls.getObject().translateX( velocity.x * delta );
       controls.getObject().translateY( velocity.y * delta );
       controls.getObject().translateZ( velocity.z * delta );
