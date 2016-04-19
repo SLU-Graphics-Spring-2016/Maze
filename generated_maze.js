@@ -65,7 +65,7 @@ if ( havePointerLock ) {
   }
 
   init();
-  animate();
+
 
   var controlsEnabled = false;
 
@@ -187,7 +187,7 @@ if ( havePointerLock ) {
     document.addEventListener( 'keyup', onKeyUp, false );
 
     raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3(), 0,10);
-    console.log(maze.width);
+    // console.log(maze.width);
     //Rendering
 
     renderer = new THREE.WebGLRenderer();
@@ -197,65 +197,6 @@ if ( havePointerLock ) {
     document.body.appendChild(renderer.domElement);
   }
 
-  function animate() {
-    requestAnimationFrame( animate );
-      
-    if ( controlsEnabled ) {
-      raycaster.ray.origin.copy( controls.getObject().position );
-      // raycaster.ray.direction.copy(controls.getObject().getWorldDirection());
-      raycaster.ray.direction.copy(velocity);
-
-      var intersections = raycaster.intersectObjects( maze.getElements() );
-      var isOnObject = intersections.length > 0;
-      console.log(isOnObject);
-
-      var time = performance.now();
-      var delta = ( time - prevTime ) / 1000;
-
-      velocity.x -= velocity.x * 10.0 * delta;
-      velocity.z -= velocity.z * 10.0 * delta;
-      velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
-
-      if ( moveForward ) velocity.z -= 400.0 * delta;
-      if ( moveBackward ) velocity.z += 400.0 * delta;
-
-      if ( moveLeft ) velocity.x -= 400.0 * delta;
-      if ( moveRight ) velocity.x += 400.0 * delta;
-
-      if ( isOnObject === true ) {
-        velocity.y = Math.max( 0, velocity.y );
-        canJump = true;
-        console.log("hit");
-        velocity.z=Math.max(0,velocity.z);
-      }
-      
-      velocity.z-= velocity.z * 10.0 * delta;
-      controls.getObject().translateX( velocity.x * delta );
-      controls.getObject().translateY( velocity.y * delta );
-      controls.getObject().translateZ( velocity.z * delta );
-
-      if ( controls.getObject().position.y < 10 ) {
-        velocity.y = 0;
-        controls.getObject().position.y = 10;
-        canJump = true;
-      }
-      prevTime = time;
-	
-    }
-    
-    renderer.render( scene, camera );
-	
-  }
-
-// function render() {
-// 	// var delta = clock.getDelta();
-//  //  controls.update(delta);
-//   requestAnimationFrame(render);
-//   renderer.render(scene, camera);
-//   // console.log(camera.lookAt);
-// }
-
-// render();
 
 /**
  * Function handles the resize event. This make sure the camera and the renderer
