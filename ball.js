@@ -1,33 +1,19 @@
 var balls=[];
-function createBalls () {
+// var names=[];
+// for (var i=0;i<20;i++){
+// 	names[i]=i;
+// }
+// console.log(names);
+for (var i=0;i<20;i++){
+	createBall();
+}
+function createBall () {
 	var geometry = new THREE.DodecahedronGeometry(2,5);
 	var material = new THREE.MeshPhongMaterial({color:0x10ED8A});
 	var ball = new THREE.Mesh(geometry,material);
-	return ball;
+	ball.position.x=Math.floor( Math.random() * 20 - 10 ) * 10;
+	ball.position.y=10;
+	ball.position.z=Math.floor( Math.random() * 20 - 10 ) * 10;
+	scene.add(ball);
+	balls.push(ball);
 }
-
-var X=-51, Z=-96;
-for (var i=0;i<8;i++){
-	balls[i]=createBalls();
-	balls[i].position.x=X;
-	balls[i].position.y=2;
-	balls[i].position.z=Z;
-	X+=17;
-	Z+=24;
-}
-
-for (var i=0;i<10;i++)
-	scene.add(balls[i]);
-
-var X=21, Z=-96;
-for (var i=0;i<7;i++){
-	balls[i]=createBalls();
-	balls[i].position.x=X;
-	balls[i].position.y=2;
-	balls[i].position.z=Z;
-	X-=12;
-	Z+=32;
-}
-
-for (var i=0;i<10;i++)
-	scene.add(balls[i]);
