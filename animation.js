@@ -8,8 +8,9 @@ function animate() {
       
 
     var intersections = raycaster.intersectObjects( maze.getElements() );
+    // intersections = raycaster.intersectObjects( balls );
     // console.log(intersections);
-    var isOnObject = intersections.length > 0;
+    hitWall = intersections.length > 0;
     // console.log(isOnObject);
 
     var time = performance.now();
@@ -18,23 +19,28 @@ function animate() {
     velocity.x -= velocity.x * 10.0 * delta;
     velocity.z -= velocity.z * 10.0 * delta;
     velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
+    // camera.position.y=0;
+    if ( moveForward ) 
+      velocity.z -= 400.0 * delta;
+    if ( moveBackward ) 
+      velocity.z += 400.0 * delta;
+    if ( moveLeft ) 
+      velocity.x -= 400.0 * delta;
+    if ( moveRight ) 
+      velocity.x += 400.0 * delta;
 
-    if ( moveForward ) velocity.z -= 400.0 * delta;
-    if ( moveBackward ) velocity.z += 400.0 * delta;
-
-    if ( moveLeft ) velocity.x -= 400.0 * delta;
-    if ( moveRight ) velocity.x += 400.0 * delta;
-
-    if ( isOnObject === true) {
-    // velocity.y = Math.max( 0, velocity.y );
-    // canJump = true;
-    console.log("hit");
-    // velocity.z=Math.max(0,velocity.z);
-    // console.log("velocity.z: "+velocity.z);
-    // velocity.z=0;
+    if ( hitWall) {
+      console.log("hit");
+      velocity.z+=1;
     }
-      
 
+    for (var i=0;i<30;i++){
+      console.log(controls.getObject().position);
+      if (balls[i].position.distanceTo(controls.getObject().position)<=2){
+        scene.remove(balls[i]);
+      }
+    }
+    
     controls.getObject().translateX( velocity.x * delta );
     controls.getObject().translateY( velocity.y * delta );
     controls.getObject().translateZ( velocity.z * delta );
