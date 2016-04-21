@@ -29,14 +29,11 @@ function animate() {
     if ( moveRight ) 
       velocity.x += 400.0 * delta;
 
-/*    if ( hitWall) {
-      console.log("hit");
-      velocity.z+=1;
-    }
-*/
+
     for (var i=0;i<30;i++){
-      console.log(controls.getObject().position);
+      // console.log(controls.getObject().position);
       if (balls[i].position.distanceTo(controls.getObject().position)<=2){
+        sound.play();
         scene.remove(balls[i]);
       }
     }
