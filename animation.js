@@ -35,8 +35,9 @@ function animate() {
     // }
 
     for (var i=0;i<30;i++){
-      console.log(controls.getObject().position);
+      // console.log(controls.getObject().position);
       if (balls[i].position.distanceTo(controls.getObject().position)<=2){
+        sound.play();
         scene.remove(balls[i]);
       }
     }
