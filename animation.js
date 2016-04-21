@@ -29,10 +29,10 @@ function animate() {
     if ( moveRight ) 
       velocity.x += 400.0 * delta;
 
-    if ( hitWall) {
-      console.log("hit");
-      velocity.z+=1;
-    }
+    // if ( hitWall) {
+    //   console.log("hit");
+    //   velocity.z+=1;
+    // }
 
     for (var i=0;i<30;i++){
       console.log(controls.getObject().position);
