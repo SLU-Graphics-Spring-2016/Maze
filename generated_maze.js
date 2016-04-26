@@ -7,7 +7,7 @@ var controls;
 var raycaster;
 var blocker = document.getElementById( 'blocker' );
 var instructions = document.getElementById( 'instructions' );
-
+var isOnObject;
 var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
 if ( havePointerLock ) {
     var element = document.body;
@@ -83,7 +83,10 @@ if ( havePointerLock ) {
     scene = new THREE.Scene();
     scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
     maze = new Maze(scene,17, 200, 200);
-    console.log(maze.getElements());
+    var wallTexture = new THREE.TextureLoader().load('boxTexure.png');
+    var material = new THREE.MeshBasicMaterial({map:boxTexture});
+    var wall = new THREE.Mesh(wallTexture,material);
+    // console.log(maze.getElements());
     maze.generate();
     maze.draw();
 
