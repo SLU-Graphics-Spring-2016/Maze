@@ -4,7 +4,8 @@ var material = new THREE.MeshPhongMaterial({color:0x10ED8A});
 
 //Sounds
 var listener=new THREE.AudioListener();
-var sound;
+var sound=new THREE.PositionalAudio(listener);
+sound.load('sound.mp3');
 camera.add(listener);
 
 for (var i=0;i<30;i++){
@@ -20,8 +21,7 @@ function createBall () {
     scene.add(ball);
    
     
-    sound=new THREE.PositionalAudio(listener);
-    sound.load('sound.mp3');
+
     ball.add(sound);
     balls.push(ball);
 }
