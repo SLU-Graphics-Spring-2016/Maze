@@ -82,11 +82,28 @@ if ( havePointerLock ) {
     // create a scene, that will hold all our elements such as objects, cameras and lights.
     scene = new THREE.Scene();
     scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
+
+    //skybox
+    var skyboxLoader = new THREE.CubeTextureLoader();
+    var urls=['totality_rt.tga','totality_lf.tga',
+        'totality_up.tga','totality_dn.tga',
+        'totality_bk.tga','totality_ft.tga'];
+    var textureCube=skyboxLoader.load(urls);
+    textureCube.mapping=THREE.CubeRefractionMapping;
+
+    var shader = THREE.ShaderLib[ "cube" ];
+    shader.uniforms[ "tCube" ].value = textureCube;
+    var material = new THREE.ShaderMaterial( {
+      fragmentShader: shader.fragmentShader,
+      vertexShader: shader.vertexShader,
+      uniforms: shader.uniforms,
+      depthWrite: false,
+      side: THREE.BackSide
+    } ),
+    mesh = new THREE.Mesh( new THREE.BoxGeometry( 100, 100, 100 ), material );
+    scene.add( mesh );
+
     maze = new Maze(scene,17, 200, 200);
-    // var wallTexture = new THREE.TextureLoader().load('boxTexure.png');
-    // var material = new THREE.MeshBasicMaterial({map:boxTexture});
-    // var wall = new THREE.Mesh(wallTexture,material);
-    // console.log(maze.getElements());
     maze.generate();
     maze.draw();
 
