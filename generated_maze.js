@@ -83,9 +83,9 @@ if ( havePointerLock ) {
     scene = new THREE.Scene();
     scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
     maze = new Maze(scene,17, 200, 200);
-    var wallTexture = new THREE.TextureLoader().load('boxTexure.png');
-    var material = new THREE.MeshBasicMaterial({map:boxTexture});
-    var wall = new THREE.Mesh(wallTexture,material);
+    // var wallTexture = new THREE.TextureLoader().load('boxTexure.png');
+    // var material = new THREE.MeshBasicMaterial({map:boxTexture});
+    // var wall = new THREE.Mesh(wallTexture,material);
     // console.log(maze.getElements());
     maze.generate();
     maze.draw();
