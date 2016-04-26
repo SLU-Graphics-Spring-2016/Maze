@@ -81,13 +81,14 @@ if ( havePointerLock ) {
   function init () {
     // create a scene, that will hold all our elements such as objects, cameras and lights.
     scene = new THREE.Scene();
-    scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
+      scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
 
-    //skybox
-    var skyboxLoader = new THREE.CubeTextureLoader();
-    var urls=['totality_rt.tga','totality_lf.tga',
-        'totality_up.tga','totality_dn.tga',
-        'totality_bk.tga','totality_ft.tga'];
+      //skybox
+      var skyboxLoader = new THREE.CubeTextureLoader();
+      var r='skybox/';
+      var urls=[r+'totality_rt.jpg',r+'totality_lf.jpg',
+        r+'totality_up.jpg',r+'totality_dn.jpg',
+        r+'totality_bk.jpg',r+'totality_ft.jpg'];
     var textureCube=skyboxLoader.load(urls);
     textureCube.mapping=THREE.CubeRefractionMapping;
 
@@ -100,7 +101,7 @@ if ( havePointerLock ) {
       depthWrite: false,
       side: THREE.BackSide
     } ),
-    mesh = new THREE.Mesh( new THREE.BoxGeometry( 100, 100, 100 ), material );
+    mesh = new THREE.Mesh( new THREE.BoxGeometry( 300, 300, 300 ), material );
     scene.add( mesh );
 
     maze = new Maze(scene,17, 200, 200);
