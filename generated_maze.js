@@ -114,7 +114,7 @@ function init () {
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
     // camera.position.y=54;
     // camera.position.z=100;
-    // camera.lookAt(new THREE.Vector3(0,0,0));
+
     camera.add(flashlight);
     flashlight.position.set(0,0,1);
     flashlight.target = camera;
@@ -144,9 +144,7 @@ function init () {
     ambientLight.position.set(0,30,0);
     scene.add(ambientLight);
 
-    // var ambientLight1 = new THREE.AmbientLight(0x080808);
-    // ambientLight.position.set(-30,30,0);
-    // scene.add(ambientLight1);
+    
     scene.add(spotLight);
     controls = new THREE.PointerLockControls( camera );
     scene.add( controls.getObject() );
@@ -208,11 +206,11 @@ function init () {
     document.addEventListener( 'keyup', onKeyUp, false );
 
     raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3(), 0,10);
-    // console.log(maze.width);
+   
     //Rendering
 
     renderer = new THREE.WebGLRenderer();
-    // renderer.setClearColor(0x000000, 1.0);
+   
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
     document.body.appendChild(renderer.domElement);
