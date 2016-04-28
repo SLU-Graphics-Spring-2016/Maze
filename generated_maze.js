@@ -111,7 +111,7 @@ function init () {
     flashlight = new THREE.SpotLight(0xffffff,1,80);
     
     // create a camera, which defines where we're looking at.
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
     // camera.position.y=54;
     // camera.position.z=100;
 
@@ -205,7 +205,7 @@ function init () {
     document.addEventListener( 'keydown', onKeyDown, false );
     document.addEventListener( 'keyup', onKeyUp, false );
 
-    raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3(), 0,10);
+
    
     //Rendering
 

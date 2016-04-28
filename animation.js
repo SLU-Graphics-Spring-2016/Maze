@@ -18,45 +18,47 @@ function animate() {
 	if ( moveRight ) 
 	    velocity.x += 400.0 * delta;
 
-	//forward
-	raycaster.ray.origin.copy( camera.position );
-	raycaster.ray.origin.y=10;
-	raycaster.ray.direction.copy(camera.getWorldDirection());
+	var r=new THREE.Vector3();
+	var c=camera.getWorldDirection();
+	r.copy(velocity);
+	r.y=0;
+	if (r.lengthSq()>0.001){
+	    r.normalize();
+	    raycaster = new THREE.Raycaster( new THREE.Vector3(),
+					     new THREE.Vector3(),
+					     0,5);
+	    raycaster.ray.direction.x=-r.z*c.x-r.x*c.z;
+	    raycaster.ray.direction.z=r.x*c.x-r.z*c.z;
+	   	   
+	    raycaster.ray.origin.copy( camera.position );
+	    raycaster.ray.origin.y=10;
+		   
+	    console.log(raycaster.ray.direction);
+	    console.log(camera.getWorldDirection());
+	    console.log("dot: "+raycaster.ray.direction.dot(camera.getWorldDirection()));
+	    var intersections = raycaster.intersectObjects( maze.getElements() );
+	    
+	    if (intersections.length > 0) {
+		
+	    //set velocity to 0
+		velocity.z=0;
+		velocity.x=0
+	    }
+	}    /*
+	var rays = 6.0;
+	for (var i=0;i<rays;i++){
+	    var curr=camera.getWorldDirection();
+	   
+	    if (.dot(curr) > 0){
 	
-	var intersections = raycaster.intersectObjects( maze.getElements() );
-	if (intersections.length>0) velocity.z=Math.max(velocity.z,0);
+		raycaster.ray.direction.copy(camera.getWorldDirection());
+		raycaster.ray.direction.copy(curr);
+	;
+}
 
-	//back
-	raycaster.ray.origin.copy( camera.position );
-	raycaster.ray.origin.y=10;
-	raycaster.ray.direction.copy(camera.getWorldDirection().negate());
-	
-	var intersections = raycaster.intersectObjects( maze.getElements() );
-	if (intersections.length>0) velocity.z=Math.min(velocity.z,0);
-
-	//left
-	raycaster.ray.origin.copy( camera.position );
-	raycaster.ray.origin.y=10;
-	var curr=camera.getWorldDirection();
-	curr.setX(curr.x*Math.cos(Math.PI/2)+curr.z*Math.sin(Math.PI/2));
-	curr.setZ(-curr.x*Math.sin(Math.PI/2)+curr.z*Math.cos(Math.PI/2));
-	raycaster.ray.direction.copy(curr);
-	
-	var intersections = raycaster.intersectObjects( maze.getElements() );
-	if (intersections.length>0) velocity.x=Math.max(velocity.x,0);
-	
-
-	//right
-	raycaster.ray.origin.copy( camera.position );
-	raycaster.ray.origin.y=10;
-	var curr1=camera.getWorldDirection();
-	curr1.setX(curr1.x*Math.cos(-Math.PI/2)+curr1.z*Math.sin(-Math.PI/2));
-	curr1.setZ(-curr1.x*Math.sin(-Math.PI/2)+curr1.z*Math.cos(-Math.PI/2));
-	raycaster.ray.direction.copy(curr1);
-	
-	var intersections = raycaster.intersectObjects( maze.getElements() );
-	if (intersections.length>0) velocity.x=Math.min(velocity.x,0);
-	
+	    }
+	}
+*/
 	//console.log("camera: "+camera.position.x);
 	for (var i=0;i<30;i++){
 	    if (balls[i].position.distanceTo(camera.position)<=2){
