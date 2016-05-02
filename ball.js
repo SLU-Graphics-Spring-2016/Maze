@@ -19,10 +19,10 @@ function createBall () {
     ball.position.y=10;
     ball.position.z=Math.floor( Math.random() * 20 - 10 ) * 10;
     scene.add(ball);
-   
-    
 
     ball.add(sound);
     balls.push(ball);
 }
+
+var total=0;
 

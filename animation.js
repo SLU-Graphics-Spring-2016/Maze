@@ -60,11 +60,17 @@ function animate() {
 	}
 */
 	//console.log("camera: "+camera.position.x);
+
 	for (var i=0;i<30;i++){
 	    if (balls[i].position.distanceTo(camera.position)<=2){
 		sound.play();
 		scene.remove(balls[i]);
+
+		total+=10;
+		score.textContent=total;
+
 	    }
+
 	}
 	
 	controls.getObject().translateX( velocity.x * delta );
