@@ -9,7 +9,7 @@ sound.load('sound.mp3');
 camera.add(listener);
 
 for (var i=0;i<30;i++){
-	createBall();
+    createBall();
 }
 // console.log(balls[0].vertices);
 
