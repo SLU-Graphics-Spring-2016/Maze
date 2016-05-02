@@ -8,7 +8,7 @@ var sound=new THREE.PositionalAudio(listener);
 sound.load('sound.mp3');
 camera.add(listener);
 
-for (var i=0;i<30;i++){
+for (var i=0;i<100;i++){
     createBall();
 }
 // console.log(balls[0].vertices);
@@ -19,10 +19,9 @@ function createBall () {
     ball.position.y=10;
     ball.position.z=Math.floor( Math.random() * 20 - 10 ) * 10;
     scene.add(ball);
-
     ball.add(sound);
     balls.push(ball);
 }
 
-var total=0;
+
 
