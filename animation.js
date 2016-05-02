@@ -47,7 +47,6 @@ function animate() {
 	}    
 
 	var len=balls.length;
-	var total=0;
 	for (var i=0;i<len;i++){
 	    if (balls[i].position.distanceTo(camera.position)<=2){
 		sound.play();

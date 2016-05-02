@@ -23,5 +23,4 @@ function createBall () {
     balls.push(ball);
 }
 
-
-
+var total=0;
