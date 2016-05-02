@@ -1,4 +1,5 @@
 // global variables
+var score=document.getElementById('score');
 var renderer;
 var scene;
 var camera;
@@ -79,7 +80,7 @@ var prevTime = performance.now();
 var velocity = new THREE.Vector3();
 var maze;
 function init () {
-    // create a scene, that will hold all our elements such as objects, cameras and lights.
+     // create a scene, that will hold all our elements such as objects, cameras and lights.
     scene = new THREE.Scene();
     scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
     

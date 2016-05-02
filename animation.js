@@ -33,9 +33,9 @@ function animate() {
 	    raycaster.ray.origin.copy( camera.position );
 	    raycaster.ray.origin.y=10;
 		   
-	    console.log(raycaster.ray.direction);
-	    console.log(camera.getWorldDirection());
-	    console.log("dot: "+raycaster.ray.direction.dot(camera.getWorldDirection()));
+//	    console.log(raycaster.ray.direction);
+//	    console.log(camera.getWorldDirection());
+//	    console.log("dot: "+raycaster.ray.direction.dot(camera.getWorldDirection()));
 	    var intersections = raycaster.intersectObjects( maze.getElements() );
 	    
 	    if (intersections.length > 0) {
