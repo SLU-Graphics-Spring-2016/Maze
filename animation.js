@@ -47,12 +47,13 @@ function animate() {
 	}    
 
 	var len=balls.length;
+	var total=0;
 	for (var i=0;i<len;i++){
 	    if (balls[i].position.distanceTo(camera.position)<=2){
 		sound.play();
 		scene.remove(balls[i]);
 		total+=10;
-		score.textContent=total;
+		score.textContent="Score: " + total;
 		//shift array, remove curr hit ball
 		for (var j=i;j<len-1;j++)
 		    balls[j]=balls[j+1];
