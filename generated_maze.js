@@ -120,9 +120,10 @@ function init () {
     flashlight.position.set(0,0,1);
     flashlight.target = camera;
 
-    // create the ground plane
+    // create the ground plane and add texture
+    var planeTexture = new THREE.TextureLoader().load('plane.jpg');
     var planeGeometry = new THREE.PlaneGeometry(200, 200);
-    var planeMaterial = new THREE.MeshLambertMaterial({color: 0xffffff});
+    var planeMaterial = new THREE.MeshLambertMaterial({color: 0xffffff, map:planeTexture});
     var plane = new THREE.Mesh(planeGeometry, planeMaterial);
     plane.receiveShadow = true;
     
