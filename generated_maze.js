@@ -1,6 +1,7 @@
 // global variables
 var score=document.getElementById('score');
 var renderer;
+var stats;
 var scene;
 var camera;
 var objects = [];
@@ -83,6 +84,7 @@ function init () {
      // create a scene, that will hold all our elements such as objects, cameras and lights.
     scene = new THREE.Scene();
     scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
+    container = document.getElementById( 'container' );
     
     //skybox
     var skyboxLoader = new THREE.CubeTextureLoader();
@@ -150,6 +152,10 @@ function init () {
     scene.add(spotLight);
     controls = new THREE.PointerLockControls( camera );
     scene.add( controls.getObject() );
+
+
+    stats = new Stats();
+    document.body.appendChild( stats.dom );
 
     var onKeyDown = function ( event ) {
       switch ( event.keyCode ) {

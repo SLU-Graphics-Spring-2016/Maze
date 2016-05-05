@@ -73,7 +73,8 @@ function animate() {
 	prevTime = time;
 	
     }
-    
+    stats.update();
+
     renderer.render( scene, camera );
     
 }
