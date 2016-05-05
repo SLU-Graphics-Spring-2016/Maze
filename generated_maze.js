@@ -1,6 +1,7 @@
 // global variables
 var score=document.getElementById('score');
 var renderer;
+var stats;
 var scene;
 var camera;
 var objects = [];
@@ -158,6 +159,10 @@ function init () {
     scene.add(spotLight);
     controls = new THREE.PointerLockControls( camera );
     scene.add( controls.getObject() );
+
+
+    stats = new Stats();
+    document.body.appendChild( stats.dom );
 
     var onKeyDown = function ( event ) {
       switch ( event.keyCode ) {

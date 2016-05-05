@@ -74,17 +74,18 @@ function animate() {
 	prevTime = time;
 	
     }
-    //var maxY=20;
+
+
     var maxZ=100
     for (var j=0;j<len;j++){
-//	balls[j].position.y+=0.2;
+
 	balls[j].position.z+=0.2;
-//	if (balls[j].position.y>maxY)
-//	    balls[j].position.y=5;
+
 	if (balls[j].position.z>maxZ)
 	    balls[j].position.z=0;
     }
     
+
     renderer.render( scene, camera );
     stats.update();
 }

@@ -1,6 +1,10 @@
 <html>
   <head>
     <title>generated mazes</title>
+    <audio autoplay loop>
+      <source src="mengli2.mp3">
+        <p>audio doesnt' work</p>
+    </audio>
     <style>
       html, body {
         width: 100%;
@@ -19,10 +23,11 @@
       }
       
       .scorebox{
-      postion:absolute;
-      width:100%;
-      text-align:center;
-       background-color: rgba(0,0,0,0.5);
+        postion:absolute;
+        width:100%;
+        text-align:center;
+        background-color: rgba(0,0,0,0);
+ 
       }
       .instructionsbox {
         width: 100%;
@@ -58,19 +63,26 @@
     <script src="libs/maze/underscore-min.js"></script>
     <script src="libs/pointlock.js"></script>
     <script src="libs/stats.min.js"></script>
+
     <div class="blockerbox" id="blocker">
 
       <div class="instructionsbox" id="instructions">
-        <span style="font-size:40px">Click to play</span>
+       <span style="font-size:40px">Maze</span>
         <br />
-        (W, A, S, D = Move, SPACE = Jump, MOUSE = Look around)
+	
+        (YiJie Wang, Jiayi Wang, Jierui Niu. 5/5/2016)
       </div>
 
     </div>
     
-       <div class="scorebox" id="score">Score: 0</div>      
+
+       <div class="scorebox" id="score"> 
+	 Score: 0
+	
+       </div>      
        <div id="container"></div>
     
+
     <script src="generated_maze.js"></script>
     <script src="ball.js"></script>
     <script src="animation.js"></script>
