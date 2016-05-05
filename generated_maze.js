@@ -9,6 +9,7 @@ var raycaster;
 var blocker = document.getElementById( 'blocker' );
 var instructions = document.getElementById( 'instructions' );
 var isOnObject;
+var container,stats;
 var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
 if ( havePointerLock ) {
     var element = document.body;
@@ -17,6 +18,7 @@ if ( havePointerLock ) {
 	    controlsEnabled = true;
             controls.enabled = true;
             blocker.style.display = 'none';
+	    
 	} 
 	else{
 	    controls.enabled = false;
@@ -83,7 +85,7 @@ function init () {
      // create a scene, that will hold all our elements such as objects, cameras and lights.
     scene = new THREE.Scene();
     scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
-    
+
     //skybox
     var skyboxLoader = new THREE.CubeTextureLoader();
     var r='skybox/';
@@ -120,6 +122,12 @@ function init () {
     flashlight.position.set(0,0,1);
     flashlight.target = camera;
 
+    //score
+    var scoreMaterial=new THREE.MeshPhongMaterial({color:0xdddddd});
+    var scoreGeometry=new THREE.TextGeometry("score");
+    var textMesh=new THREE.Mesh(scoreGeometry,scoreMaterial);
+    textMesh.position.y=window.innerHeight/2;
+    scene.add(textMesh);
     // create the ground plane and add texture
     var planeTexture = new THREE.TextureLoader().load('plane.jpg');
     var planeGeometry = new THREE.PlaneGeometry(200, 200);
@@ -215,7 +223,12 @@ function init () {
    
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
+
     document.body.appendChild(renderer.domElement);
+
+    
+    stats=new Stats();
+    document.body.appendChild( stats.dom );
   }
 
 
